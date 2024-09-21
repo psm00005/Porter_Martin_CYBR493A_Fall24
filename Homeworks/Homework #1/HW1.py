@@ -39,6 +39,11 @@ def main():
         if result_from_method == 0:
             print(f"[{current_time}] Ping to {ip} Successful.")
             success_count += 1
+            ##Could not get this part of the code to work
+           ## sqlCommand = 'INSERT INTO Martin_Porter_HW1_Ips (ip, timestamp, status) VALUES(%s, %s, %s)'
+            ##values = (ip, current_time, status)
+          ##  my_db.query(sqlCommand, values)
+
         else:
             print(f"[{current_time}] Ping to {ip} Failed.")
             failure_count += 1
