@@ -7,6 +7,7 @@
 print("Porter Martin, CYBR493A, Fall24, Homework #1")
 
 import os
+import DBConnector
 import time
 from datetime import datetime
 
@@ -24,6 +25,7 @@ def main():
     """
     Main function to prompt for an IP address and check if the host is responding.
     """
+    my_db = DBConnector.MyDB()
 ## List of IPS I found on a website for randomly selected IPS.
     ips = ["127.0.0.1", "8.8.8.8", "192.168.10.10", "1.1.1.1", "208.67.222.222", "4.2.2.2", "64.6.64.6", "69.162.81.155", "209.142.68.29", "206.71.50.230"]
 
@@ -35,18 +37,23 @@ def main():
         current_time = (datetime.now())
         result_from_method = ping_something(ip)
         ##print(result_from_method)
-##Prints the number of times the ping failed or succeeded
+## Added a Status and imported DBConnector at the top to fix the code
         if result_from_method == 0:
+            status = 0
             print(f"[{current_time}] Ping to {ip} Successful.")
             success_count += 1
-            ##Could not get this part of the code to work
-           ## sqlCommand = 'INSERT INTO Martin_Porter_HW1_Ips (ip, timestamp, status) VALUES(%s, %s, %s)'
-            ##values = (ip, current_time, status)
-          ##  my_db.query(sqlCommand, values)
-
+            sqlCommand = 'INSERT INTO Martin_Porter_HW1_Ips (ip, time_stamp, status) VALUES(%s, %s, %s)'
+            values = (ip, current_time, status)
+            my_db.query(sqlCommand, values)
+## Added status and the same code in the "IF" statement above into the "ELSE"
         else:
+            status = 1
             print(f"[{current_time}] Ping to {ip} Failed.")
             failure_count += 1
+            sqlCommand = 'INSERT INTO Martin_Porter_HW1_Ips (ip, time_stamp, status) VALUES(%s, %s, %s)'
+            values = (ip, current_time, status)
+            my_db.query(sqlCommand, values)
+
 ## Summarizes the total number of succesful and failed pings.
     print("\nSummary:")
     print(f"Total successful pings: {success_count}")
