@@ -36,7 +36,7 @@ def main():
     for ip in ips:
         current_time = (datetime.now())
         result_from_method = ping_something(ip)
-        ##print(result_from_method)
+        print(result_from_method)
 ## Added a Status and imported DBConnector at the top to fix the code
         if result_from_method == 0:
             status = 0
