@@ -7,7 +7,7 @@ import DBConnector
 import tkinter as tk
 from tkinter import messagebox
 
-# Restructured the original Caesar Cipher we used in class to fit into this program for both the encrypt and decrypt portions.
+# Restructured the original Caesar Cipher we used in class to fit into this program for both the encrypt and decrypt portions
 def encrypt_password(message):
     # Alphabet creation: uppercase English letters
     key = 15
