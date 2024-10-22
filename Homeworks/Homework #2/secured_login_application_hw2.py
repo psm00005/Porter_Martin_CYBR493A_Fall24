@@ -2,10 +2,15 @@
 # 10/17/2024
 # Secured Login Application Homework #2
 # This program encrypts and decrypts the given passwords/usernames using a "Caesar Cipher", and stores them in a database.
+import subprocess
+import sys
 import string
 import DBConnector
 import tkinter as tk
 from tkinter import messagebox
+
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
 # Restructured the original Caesar Cipher we used in class to fit into this program for both the encrypt and decrypt portions
 def encrypt_password(message):
@@ -138,6 +143,14 @@ def create_login_screen(db):
         root.mainloop()
 
 def main():
+    # List of required packages
+    required_packages = ['matplotlib', 'Crypto', 'package3']
+
+    for package in required_packages:
+        try:
+            __import__(package)
+        except ImportError:
+            install(package)
 
         # Connect to the database
         db = DBConnector.MyDB()
